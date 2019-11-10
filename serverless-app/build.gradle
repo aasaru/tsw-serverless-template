@@ -1,0 +1,71 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://plugins.gradle.org/m2/" }
+  }
+}
+
+plugins {
+  id 'org.jetbrains.kotlin.jvm'
+  id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+  id "com.github.johnrengelman.shadow" version "5.1.0"
+}
+
+repositories {
+  maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+group = 'com.getchange'
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+}
+
+def  globalConf = rootProject.ext
+
+dependencies {
+  Map<String, String> dependencies = globalConf.commonDependencies
+  compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.1.51'
+  compile dependencies.postgresDriver
+  compile dependencies.awsLamdaCore
+  compile dependencies.awsLambdaLog4J
+  compile dependencies.awsLambdaEvents
+  compile dependencies.jacksonCore
+  compile dependencies.jacksonDatabind
+  compile dependencies.kotlinLogging
+  implementation dependencies.gson
+  testCompile dependencies.junitJupiter
+  testCompile dependencies.testContainersPostgres
+  testImplementation(
+          'org.assertj:assertj-core:3.12.2'
+  )
+  testRuntimeOnly dependencies.junitJupiterApi
+  testCompile dependencies.junitJupiterEngine
+  testCompile dependencies.mockito
+
+  compile(project(':migrant'))
+  compile(project(':order-engine'))
+}
+
+task deploy(type: Exec, dependsOn: 'shadowJar') {
+  commandLine 'serverless', 'deploy'
+}
+
+//task copyMigrations {
+//  mkdir('src/main/resources/migrationscripts')
+//  copy {
+//    from 'migrationscripts/'
+//    into 'src/main/resources/migrationscripts'
+//  }
+//}
+//
+//
+//shadowJar.dependsOn copyMigrations
+
+test {
+  useJUnitPlatform()
+  afterSuite { suite, result ->
+    result.exception?.printStackTrace()
+  }
+}

@@ -1,0 +1,11 @@
+functions:
+  migrate:
+    handler: com.getchange.tsw.MigrationHandler
+    timeout: 300
+  hello:
+    handler: com.getchange.tsw.HelloHandler
+    timeout: 300
+    events:
+      - http:
+          path: hello
+          method: get

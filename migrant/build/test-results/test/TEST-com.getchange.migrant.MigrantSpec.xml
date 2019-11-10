@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.getchange.migrant.MigrantSpec" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-11-09T20:05:00" hostname="Olabodes-MacBook-Pro-2.local" time="32.147">
+  <properties/>
+  <testcase name="Creates history table()" classname="com.getchange.migrant.MigrantSpec" time="6.443"/>
+  <testcase name="Loads up the migration scripts()" classname="com.getchange.migrant.MigrantSpec" time="6.414"/>
+  <testcase name="Runs the scripts not found in the history()" classname="com.getchange.migrant.MigrantSpec" time="6.578"/>
+  <testcase name="Logs saved migration in the history database()" classname="com.getchange.migrant.MigrantSpec" time="6.447"/>
+  <testcase name="Throws exception when migration script hashes don't match history()" classname="com.getchange.migrant.MigrantSpec" time="6.263"/>
+  <system-out><![CDATA[22:04:58.126 [Test worker] DEBUG org.testcontainers.utility.TestcontainersConfiguration - Testcontainers configuration overrides will be loaded from file:/Users/olabodeadedoyin/.testcontainers.properties
+22:04:58.129 [Test worker] DEBUG org.testcontainers.utility.TestcontainersConfiguration - Testcontainers configuration overrides loaded from TestcontainersConfiguration(properties={docker.client.strategy=org.testcontainers.dockerclient.UnixSocketClientProviderStrategy})
+22:04:58.150 [Test worker] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+22:04:58.187 [Test worker] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy - Will use 'okhttp' transport
+22:04:58.450 [ducttape-0] DEBUG org.testcontainers.dockerclient.DockerClientProviderStrategy - Pinging docker daemon...
+22:04:58.632 [ducttape-0] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: org.testcontainers.dockerclient.transport.okhttp.OkHttpDockerCmdExecFactory$1@7d76820a
+22:04:58.744 [Test worker] INFO org.testcontainers.dockerclient.UnixSocketClientProviderStrategy - Accessing docker with local Unix socket
+22:04:58.745 [Test worker] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy - Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+22:04:58.746 [Test worker] INFO org.testcontainers.DockerClientFactory - Docker host IP address is localhost
+22:04:58.749 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: com.github.dockerjava.core.exec.InfoCmdExec@44875455
+22:04:58.898 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: com.github.dockerjava.core.exec.VersionCmdExec@732fa9a4
+22:04:58.918 [Test worker] INFO org.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 19.03.4
+  API Version: 1.40
+  Operating System: Docker Desktop
+  Total Memory: 1998 MB
+22:04:58.922 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: ListImagesCmdImpl[imageNameFilter=quay.io/testcontainers/ryuk:0.2.3,showAll=false,filters=com.github.dockerjava.core.util.FiltersBuilder@0,execution=com.github.dockerjava.core.exec.ListImagesCmdExec@1534559a]
+22:04:59.005 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Looking up auth config for image: quay.io/testcontainers/ryuk:0.2.3
+22:04:59.005 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - RegistryAuthLocator has configFile: /Users/olabodeadedoyin/.docker/config.json (exists) and commandPathPrefix: 
+22:04:59.009 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - registryName [quay.io] for dockerImageName [quay.io/testcontainers/ryuk:0.2.3]
+22:04:59.010 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Executing docker credential provider: docker-credential-osxkeychain to locate auth config for: quay.io
+22:04:59.020 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Executing [docker-credential-osxkeychain, get].
+22:04:59.031 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Started java.lang.UNIXProcess@1d9318fd
+22:04:59.076 [WaitForProcess-java.lang.UNIXProcess@1d9318fd] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.WaitForProcess - java.lang.UNIXProcess@1d9318fd stopped with exit code 1
+22:04:59.078 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Executing [docker-credential-osxkeychain, get].
+22:04:59.081 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Started java.lang.UNIXProcess@468e6872
+22:04:59.109 [WaitForProcess-java.lang.UNIXProcess@468e6872] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.WaitForProcess - java.lang.UNIXProcess@468e6872 stopped with exit code 1
+22:04:59.112 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Got credentials not found error message from docker credential helper - credentials not found in native keychain
+22:04:59.112 [Test worker] INFO org.testcontainers.utility.RegistryAuthLocator - Credentials not found for host (quay.io) when using credential helper/store (docker-credential-osxkeychain)
+22:04:59.113 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - no matching Auth Configs - falling back to defaultAuthConfig [null]
+22:04:59.113 [Test worker] DEBUG org.testcontainers.dockerclient.auth.AuthDelegatingDockerClientConfig - Effective auth config [null]
+22:04:59.129 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: com.github.dockerjava.core.command.CreateContainerCmdImpl@7273125c[name=testcontainers-ryuk-fa893716-df22-4f85-8c5b-d79d13cc729a,hostName=<null>,domainName=<null>,user=<null>,attachStdin=<null>,attachStdout=<null>,attachStderr=<null>,portSpecs=<null>,tty=<null>,stdinOpen=<null>,stdInOnce=<null>,env=<null>,cmd=<null>,entrypoint=<null>,image=quay.io/testcontainers/ryuk:0.2.3,volumes=com.github.dockerjava.api.model.Volumes@487bb800,workingDir=<null>,macAddress=<null>,networkDisabled=<null>,exposedPorts=com.github.dockerjava.api.model.ExposedPorts@7afa7aa2,stopSignal=<null>,hostConfig=com.github.dockerjava.api.model.HostConfig@4359108a[binds=com.github.dockerjava.api.model.Binds@31a3894e,blkioWeight=<null>,blkioWeightDevice=<null>,blkioDeviceReadBps=<null>,blkioDeviceReadIOps=<null>,blkioDeviceWriteBps=<null>,blkioDeviceWriteIOps=<null>,memorySwappiness=<null>,capAdd=<null>,capDrop=<null>,containerIDFile=<null>,cpuPeriod=<null>,cpuShares=<null>,cpuQuota=<null>,cpusetCpus=<null>,cpusetMems=<null>,devices=<null>,diskQuota=<null>,dns=<null>,dnsSearch=<null>,extraHosts=<null>,links=<null>,logConfig=<null>,lxcConf=<null>,memory=<null>,memorySwap=<null>,memoryReservation=<null>,kernelMemory=<null>,networkMode=<null>,oomKillDisable=<null>,autoRemove=true,oomScoreAdj=<null>,portBindings=<null>,privileged=false,publishAllPorts=true,readonlyRootfs=<null>,restartPolicy=<null>,ulimits=<null>,volumesFrom=<null>,pidMode=<null>,securityOpts=<null>,cgroupParent=<null>,volumeDriver=<null>,shmSize=<null>,pidsLimit=<null>,runtime=<null>,tmpFs=<null>],labels={org.testcontainers=true},networkingConfig=<null>,ipv4Address=<null>,ipv6Address=<null>,aliases=<null>,authConfig=<null>,execution=com.github.dockerjava.core.exec.CreateContainerCmdExec@2c3073fb]
+22:04:59.316 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: c0ee290c1e6b1894f0adfaa8d59410bb6039d2bec7001c71dd3ae46474e01020,com.github.dockerjava.core.exec.StartContainerCmdExec@7c36db60
+22:04:59.893 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: c0ee290c1e6b1894f0adfaa8d59410bb6039d2bec7001c71dd3ae46474e01020,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@7e487c30
+22:04:59.894 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/c0ee290c1e6b1894f0adfaa8d59410bb6039d2bec7001c71dd3ae46474e01020/json], queryParams={})
+22:04:59.947 [testcontainers-ryuk] DEBUG org.testcontainers.utility.ResourceReaper - Sending 'label=org.testcontainers%3Dtrue&label=org.testcontainers.sessionId%3Dfa893716-df22-4f85-8c5b-d79d13cc729a' to Ryuk
+22:04:59.949 [testcontainers-ryuk] DEBUG org.testcontainers.utility.ResourceReaper - Received 'ACK' from Ryuk
+22:04:59.949 [Test worker] INFO org.testcontainers.DockerClientFactory - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+        ?? Checking the system...
+        ? Docker version should be at least 1.6.0
+22:04:59.958 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: c0ee290c1e6b1894f0adfaa8d59410bb6039d2bec7001c71dd3ae46474e01020,<null>,true,<null>,<null>,<null>,<null>,{df,-P},com.github.dockerjava.core.exec.ExecCreateCmdExec@6ab13918
+22:05:00.123 [tc-okhttp-stream-779768307] DEBUG com.github.dockerjava.core.command.ExecStartResultCallback - STDOUT: Filesystem           1024-blocks    Used Available Capacity Mounted on
+overlay               61255492  27145232  30968936  47% /
+tmpfs                    65536         0     65536   0% /dev
+tmpfs                  1023420         0   1023420   0% /sys/fs/cgroup
+shm                      65536         0     65536   0% /dev/shm
+/dev/sda1             61255492  27145232  30968936  47% /etc/resolv.conf
+/dev/sda1             61255492  27145232  30968936  47% /etc/hostname
+/dev/sda1             61255492  27145232  30968936  47% /etc/hosts
+tmpfs                   204688       816    203872   0% /run/docker.sock
+tmpfs                  1023420         0   1023420   0% /proc/acpi
+tmpfs                    65536         0     65536   0% /proc/kcore
+tmpfs                    65536         0     65536   0% /proc/keys
+tmpfs                    65536         0     65536   0% /proc/timer_list
+tmpfs                    65536         0     65536   0% /proc/sched_debug
+tmpfs                  1023420         0   1023420   0% /sys/firmware
+        ? Docker environment should have more than 2GB free disk space
+22:05:00.168 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: ListImagesCmdImpl[imageNameFilter=<null>,showAll=false,filters=com.github.dockerjava.core.util.FiltersBuilder@0,execution=com.github.dockerjava.core.exec.ListImagesCmdExec@44a1f63f]
+22:05:00.235 [Test worker] DEBUG docker[postgres:9.6.12] - Starting container: postgres:9.6.12
+22:05:00.235 [Test worker] DEBUG docker[postgres:9.6.12] - Trying to start container: postgres:9.6.12
+22:05:00.236 [Test worker] DEBUG docker[postgres:9.6.12] - Trying to start container: postgres:9.6.12 (attempt 1/1)
+22:05:00.236 [Test worker] DEBUG docker[postgres:9.6.12] - Starting container: postgres:9.6.12
+22:05:00.236 [Test worker] INFO docker[postgres:9.6.12] - Creating container for image: postgres:9.6.12
+22:05:00.236 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Looking up auth config for image: postgres:9.6.12
+22:05:00.236 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - RegistryAuthLocator has configFile: /Users/olabodeadedoyin/.docker/config.json (exists) and commandPathPrefix: 
+22:05:00.236 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - registryName [index.docker.io] for dockerImageName [postgres:9.6.12]
+22:05:00.236 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Executing docker credential provider: docker-credential-osxkeychain to locate auth config for: index.docker.io
+22:05:00.236 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Executing [docker-credential-osxkeychain, get].
+22:05:00.240 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Started java.lang.UNIXProcess@6143cbbc
+22:05:00.268 [WaitForProcess-java.lang.UNIXProcess@6143cbbc] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.WaitForProcess - java.lang.UNIXProcess@6143cbbc stopped with exit code 1
+22:05:00.269 [Test worker] INFO org.testcontainers.utility.RegistryAuthLocator - Credentials not found for host (index.docker.io) when using credential helper/store (docker-credential-osxkeychain)
+22:05:00.270 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - no matching Auth Configs - falling back to defaultAuthConfig [null]
+22:05:00.270 [Test worker] DEBUG org.testcontainers.dockerclient.auth.AuthDelegatingDockerClientConfig - Effective auth config [null]
+22:05:00.275 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: com.github.dockerjava.core.command.CreateContainerCmdImpl@20ac5279[name=<null>,hostName=<null>,domainName=<null>,user=<null>,attachStdin=<null>,attachStdout=<null>,attachStderr=<null>,portSpecs=<null>,tty=<null>,stdinOpen=<null>,stdInOnce=<null>,env={POSTGRES_USER=migrant,POSTGRES_PASSWORD=migrant,POSTGRES_DB=migrant},cmd={postgres,-c,fsync=off},entrypoint=<null>,image=postgres:9.6.12,volumes=com.github.dockerjava.api.model.Volumes@33273e48,workingDir=<null>,macAddress=<null>,networkDisabled=<null>,exposedPorts=com.github.dockerjava.api.model.ExposedPorts@155ea2b6,stopSignal=<null>,hostConfig=com.github.dockerjava.api.model.HostConfig@5128780c[binds=com.github.dockerjava.api.model.Binds@13d5c7ca,blkioWeight=<null>,blkioWeightDevice=<null>,blkioDeviceReadBps=<null>,blkioDeviceReadIOps=<null>,blkioDeviceWriteBps=<null>,blkioDeviceWriteIOps=<null>,memorySwappiness=<null>,capAdd=<null>,capDrop=<null>,containerIDFile=<null>,cpuPeriod=<null>,cpuShares=<null>,cpuQuota=<null>,cpusetCpus=<null>,cpusetMems=<null>,devices=<null>,diskQuota=<null>,dns=<null>,dnsSearch=<null>,extraHosts={},links=com.github.dockerjava.api.model.Links@190a6e86,logConfig=<null>,lxcConf=<null>,memory=<null>,memorySwap=<null>,memoryReservation=<null>,kernelMemory=<null>,networkMode=<null>,oomKillDisable=<null>,autoRemove=<null>,oomScoreAdj=<null>,portBindings={},privileged=<null>,publishAllPorts=true,readonlyRootfs=<null>,restartPolicy=<null>,ulimits=<null>,volumesFrom={},pidMode=<null>,securityOpts=<null>,cgroupParent=<null>,volumeDriver=<null>,shmSize=<null>,pidsLimit=<null>,runtime=<null>,tmpFs=<null>],labels={org.testcontainers=true, org.testcontainers.sessionId=fa893716-df22-4f85-8c5b-d79d13cc729a},networkingConfig=<null>,ipv4Address=<null>,ipv6Address=<null>,aliases=<null>,authConfig=<null>,execution=com.github.dockerjava.core.exec.CreateContainerCmdExec@6b5bcb33]
+22:05:00.421 [Test worker] INFO docker[postgres:9.6.12] - Starting container with ID: f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d
+22:05:00.421 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d,com.github.dockerjava.core.exec.StartContainerCmdExec@32298735
+22:05:01.047 [Test worker] INFO docker[postgres:9.6.12] - Container postgres:9.6.12 is starting: f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d
+22:05:01.049 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@58c4b9df
+22:05:01.049 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d/json], queryParams={})
+22:05:01.059 [ducttape-0] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@47e3d283
+22:05:01.059 [ducttape-0] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d/json], queryParams={})
+22:05:01.086 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The files belonging to this database system will be owned by user "postgres".
+22:05:01.086 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: fixing permissions on existing directory /var/lib/postgresql/data ... ok
+22:05:01.087 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:01.087 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: Data page checksums are disabled.
+22:05:01.087 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:01.087 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The default text search configuration will be set to "english".
+22:05:01.087 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The default database encoding has accordingly been set to "UTF8".
+22:05:01.087 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The database cluster will be initialized with locale "en_US.utf8".
+22:05:01.087 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:01.088 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: This user must also own the server process.
+22:05:01.088 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: creating subdirectories ... ok
+22:05:01.102 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting default max_connections ... 100
+22:05:01.120 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting default shared_buffers ... 128MB
+22:05:01.120 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting dynamic shared memory implementation ... posix
+22:05:01.583 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: creating configuration files ... ok
+22:05:02.359 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: running bootstrap script ... ok
+22:05:02.964 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: performing post-bootstrap initialization ... ok
+22:05:03.380 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: 
+22:05:03.380 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:03.380 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:     pg_ctl -D /var/lib/postgresql/data -l logfile start
+22:05:03.381 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:03.381 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: Success. You can now start the database server using:
+22:05:03.381 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:03.381 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: syncing data to disk ... ok
+22:05:03.381 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: --auth-local and --auth-host, the next time you run initdb.
+22:05:03.381 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: You can change this by editing pg_hba.conf or using the option -A, or
+22:05:03.381 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: WARNING: enabling "trust" authentication for local connections
+22:05:03.427 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: waiting for server to start....LOG:  database system was shut down at 2019-11-09 20:05:02 UTC
+22:05:03.438 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  MultiXact member wraparound protections are now enabled
+22:05:03.448 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  autovacuum launcher started
+22:05:03.449 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  database system is ready to accept connections
+22:05:04.406 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: server started
+22:05:04.406 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:  done
+22:05:04.756 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: CREATE DATABASE
+22:05:04.767 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  shutting down
+22:05:04.767 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  autovacuum launcher shutting down
+22:05:04.768 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  aborting any active transactions
+22:05:04.768 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: waiting for server to shut down....LOG:  received fast shutdown request
+22:05:04.768 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:04.768 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+22:05:04.768 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:04.768 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:04.778 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  database system is shut down
+22:05:05.765 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:  done
+22:05:05.766 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: server stopped
+22:05:05.779 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:05.779 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: PostgreSQL init process complete; ready for start up.
+22:05:05.780 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:05.792 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  database system was shut down at 2019-11-09 20:05:04 UTC
+22:05:05.804 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  autovacuum launcher started
+22:05:05.804 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  database system is ready to accept connections
+22:05:05.804 [Test worker] INFO docker[postgres:9.6.12] - Container postgres:9.6.12 started
+22:05:05.988 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@3f69dbe4
+22:05:05.989 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d/json], queryParams={})
+22:05:06.003 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d,<null>,com.github.dockerjava.core.exec.KillContainerCmdExec@2449a655
+22:05:06.620 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@55090983
+22:05:06.620 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d/json], queryParams={})
+22:05:06.631 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: f1127439dedee2328a1d5248da0c67c56acf29cb8e027ae5b41625c3e72b980d,true,true,com.github.dockerjava.core.exec.RemoveContainerCmdExec@6eafdfe0
+22:05:06.675 [Test worker] DEBUG org.testcontainers.utility.ResourceReaper - Removed container and associated volume(s): postgres:9.6.12
+22:05:06.677 [Test worker] DEBUG docker[postgres:9.6.12] - Starting container: postgres:9.6.12
+22:05:06.677 [Test worker] DEBUG docker[postgres:9.6.12] - Trying to start container: postgres:9.6.12
+22:05:06.678 [Test worker] DEBUG docker[postgres:9.6.12] - Trying to start container: postgres:9.6.12 (attempt 1/1)
+22:05:06.678 [Test worker] DEBUG docker[postgres:9.6.12] - Starting container: postgres:9.6.12
+22:05:06.678 [Test worker] INFO docker[postgres:9.6.12] - Creating container for image: postgres:9.6.12
+22:05:06.678 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Looking up auth config for image: postgres:9.6.12
+22:05:06.678 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - RegistryAuthLocator has configFile: /Users/olabodeadedoyin/.docker/config.json (exists) and commandPathPrefix: 
+22:05:06.678 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - registryName [index.docker.io] for dockerImageName [postgres:9.6.12]
+22:05:06.679 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Executing docker credential provider: docker-credential-osxkeychain to locate auth config for: index.docker.io
+22:05:06.679 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Executing [docker-credential-osxkeychain, get].
+22:05:06.683 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Started java.lang.UNIXProcess@38e3729b
+22:05:06.716 [WaitForProcess-java.lang.UNIXProcess@38e3729b] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.WaitForProcess - java.lang.UNIXProcess@38e3729b stopped with exit code 1
+22:05:06.718 [Test worker] INFO org.testcontainers.utility.RegistryAuthLocator - Credentials not found for host (index.docker.io) when using credential helper/store (docker-credential-osxkeychain)
+22:05:06.718 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - no matching Auth Configs - falling back to defaultAuthConfig [null]
+22:05:06.718 [Test worker] DEBUG org.testcontainers.dockerclient.auth.AuthDelegatingDockerClientConfig - Effective auth config [null]
+22:05:06.718 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: com.github.dockerjava.core.command.CreateContainerCmdImpl@70c3f79d[name=<null>,hostName=<null>,domainName=<null>,user=<null>,attachStdin=<null>,attachStdout=<null>,attachStderr=<null>,portSpecs=<null>,tty=<null>,stdinOpen=<null>,stdInOnce=<null>,env={POSTGRES_USER=migrant,POSTGRES_PASSWORD=migrant,POSTGRES_DB=migrant},cmd={postgres,-c,fsync=off},entrypoint=<null>,image=postgres:9.6.12,volumes=com.github.dockerjava.api.model.Volumes@471277cd,workingDir=<null>,macAddress=<null>,networkDisabled=<null>,exposedPorts=com.github.dockerjava.api.model.ExposedPorts@6446b21e,stopSignal=<null>,hostConfig=com.github.dockerjava.api.model.HostConfig@63bbdb6f[binds=com.github.dockerjava.api.model.Binds@caba79a,blkioWeight=<null>,blkioWeightDevice=<null>,blkioDeviceReadBps=<null>,blkioDeviceReadIOps=<null>,blkioDeviceWriteBps=<null>,blkioDeviceWriteIOps=<null>,memorySwappiness=<null>,capAdd=<null>,capDrop=<null>,containerIDFile=<null>,cpuPeriod=<null>,cpuShares=<null>,cpuQuota=<null>,cpusetCpus=<null>,cpusetMems=<null>,devices=<null>,diskQuota=<null>,dns=<null>,dnsSearch=<null>,extraHosts={},links=com.github.dockerjava.api.model.Links@585305dd,logConfig=<null>,lxcConf=<null>,memory=<null>,memorySwap=<null>,memoryReservation=<null>,kernelMemory=<null>,networkMode=<null>,oomKillDisable=<null>,autoRemove=<null>,oomScoreAdj=<null>,portBindings={},privileged=<null>,publishAllPorts=true,readonlyRootfs=<null>,restartPolicy=<null>,ulimits=<null>,volumesFrom={},pidMode=<null>,securityOpts=<null>,cgroupParent=<null>,volumeDriver=<null>,shmSize=<null>,pidsLimit=<null>,runtime=<null>,tmpFs=<null>],labels={org.testcontainers=true, org.testcontainers.sessionId=fa893716-df22-4f85-8c5b-d79d13cc729a},networkingConfig=<null>,ipv4Address=<null>,ipv6Address=<null>,aliases=<null>,authConfig=<null>,execution=com.github.dockerjava.core.exec.CreateContainerCmdExec@3409486d]
+22:05:06.838 [Test worker] INFO docker[postgres:9.6.12] - Starting container with ID: 9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5
+22:05:06.839 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5,com.github.dockerjava.core.exec.StartContainerCmdExec@2d15fa40
+22:05:07.989 [Test worker] INFO docker[postgres:9.6.12] - Container postgres:9.6.12 is starting: 9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5
+22:05:07.989 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@2792a5ee
+22:05:07.989 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5/json], queryParams={})
+22:05:07.998 [ducttape-0] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@69f4e529
+22:05:07.999 [ducttape-0] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5/json], queryParams={})
+22:05:08.021 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The files belonging to this database system will be owned by user "postgres".
+22:05:08.021 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: fixing permissions on existing directory /var/lib/postgresql/data ... ok
+22:05:08.021 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:08.021 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: Data page checksums are disabled.
+22:05:08.021 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:08.021 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: creating subdirectories ... ok
+22:05:08.021 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The default text search configuration will be set to "english".
+22:05:08.021 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The default database encoding has accordingly been set to "UTF8".
+22:05:08.022 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The database cluster will be initialized with locale "en_US.utf8".
+22:05:08.022 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:08.022 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: This user must also own the server process.
+22:05:08.034 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting default max_connections ... 100
+22:05:08.055 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting default shared_buffers ... 128MB
+22:05:08.055 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting dynamic shared memory implementation ... posix
+22:05:08.508 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: creating configuration files ... ok
+22:05:09.172 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: running bootstrap script ... ok
+22:05:09.604 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: performing post-bootstrap initialization ... ok
+22:05:09.928 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: syncing data to disk ... ok
+22:05:09.929 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: --auth-local and --auth-host, the next time you run initdb.
+22:05:09.929 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: You can change this by editing pg_hba.conf or using the option -A, or
+22:05:09.929 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: WARNING: enabling "trust" authentication for local connections
+22:05:09.929 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: 
+22:05:09.929 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:09.929 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:     pg_ctl -D /var/lib/postgresql/data -l logfile start
+22:05:09.929 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:09.930 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: Success. You can now start the database server using:
+22:05:09.930 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:09.972 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: waiting for server to start....LOG:  database system was shut down at 2019-11-09 20:05:09 UTC
+22:05:09.984 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  database system is ready to accept connections
+22:05:09.984 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  autovacuum launcher started
+22:05:09.984 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  MultiXact member wraparound protections are now enabled
+22:05:10.952 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:  done
+22:05:10.952 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: server started
+22:05:11.300 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:11.300 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+22:05:11.300 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:11.300 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:11.300 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: CREATE DATABASE
+22:05:11.311 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  shutting down
+22:05:11.311 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  autovacuum launcher shutting down
+22:05:11.312 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  aborting any active transactions
+22:05:11.312 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: waiting for server to shut down....LOG:  received fast shutdown request
+22:05:11.323 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  database system is shut down
+22:05:12.305 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:  done
+22:05:12.306 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:12.306 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: PostgreSQL init process complete; ready for start up.
+22:05:12.306 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:12.306 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: server stopped
+22:05:12.327 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  database system was shut down at 2019-11-09 20:05:11 UTC
+22:05:12.328 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  MultiXact member wraparound protections are now enabled
+22:05:12.340 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  database system is ready to accept connections
+22:05:12.340 [Test worker] INFO docker[postgres:9.6.12] - Container postgres:9.6.12 started
+22:05:12.360 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@48caa8c
+22:05:12.360 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5/json], queryParams={})
+22:05:12.366 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5,<null>,com.github.dockerjava.core.exec.KillContainerCmdExec@3702add
+22:05:13.034 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@39e0ef5d
+22:05:13.034 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5/json], queryParams={})
+22:05:13.039 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 9ed859dc00f37d6dcdc09d4b2f55fa324ae65e52f472c0aee4332586941d9cf5,true,true,com.github.dockerjava.core.exec.RemoveContainerCmdExec@7a1ad486
+22:05:13.089 [Test worker] DEBUG org.testcontainers.utility.ResourceReaper - Removed container and associated volume(s): postgres:9.6.12
+22:05:13.091 [Test worker] DEBUG docker[postgres:9.6.12] - Starting container: postgres:9.6.12
+22:05:13.091 [Test worker] DEBUG docker[postgres:9.6.12] - Trying to start container: postgres:9.6.12
+22:05:13.091 [Test worker] DEBUG docker[postgres:9.6.12] - Trying to start container: postgres:9.6.12 (attempt 1/1)
+22:05:13.091 [Test worker] DEBUG docker[postgres:9.6.12] - Starting container: postgres:9.6.12
+22:05:13.091 [Test worker] INFO docker[postgres:9.6.12] - Creating container for image: postgres:9.6.12
+22:05:13.091 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Looking up auth config for image: postgres:9.6.12
+22:05:13.091 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - RegistryAuthLocator has configFile: /Users/olabodeadedoyin/.docker/config.json (exists) and commandPathPrefix: 
+22:05:13.092 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - registryName [index.docker.io] for dockerImageName [postgres:9.6.12]
+22:05:13.092 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Executing docker credential provider: docker-credential-osxkeychain to locate auth config for: index.docker.io
+22:05:13.092 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Executing [docker-credential-osxkeychain, get].
+22:05:13.095 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Started java.lang.UNIXProcess@6fc68b1c
+22:05:13.128 [WaitForProcess-java.lang.UNIXProcess@6fc68b1c] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.WaitForProcess - java.lang.UNIXProcess@6fc68b1c stopped with exit code 1
+22:05:13.129 [Test worker] INFO org.testcontainers.utility.RegistryAuthLocator - Credentials not found for host (index.docker.io) when using credential helper/store (docker-credential-osxkeychain)
+22:05:13.130 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - no matching Auth Configs - falling back to defaultAuthConfig [null]
+22:05:13.130 [Test worker] DEBUG org.testcontainers.dockerclient.auth.AuthDelegatingDockerClientConfig - Effective auth config [null]
+22:05:13.130 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: com.github.dockerjava.core.command.CreateContainerCmdImpl@129fc2b5[name=<null>,hostName=<null>,domainName=<null>,user=<null>,attachStdin=<null>,attachStdout=<null>,attachStderr=<null>,portSpecs=<null>,tty=<null>,stdinOpen=<null>,stdInOnce=<null>,env={POSTGRES_USER=migrant,POSTGRES_PASSWORD=migrant,POSTGRES_DB=migrant},cmd={postgres,-c,fsync=off},entrypoint=<null>,image=postgres:9.6.12,volumes=com.github.dockerjava.api.model.Volumes@7766351b,workingDir=<null>,macAddress=<null>,networkDisabled=<null>,exposedPorts=com.github.dockerjava.api.model.ExposedPorts@2c23ce80,stopSignal=<null>,hostConfig=com.github.dockerjava.api.model.HostConfig@2043bd4b[binds=com.github.dockerjava.api.model.Binds@4ca5599c,blkioWeight=<null>,blkioWeightDevice=<null>,blkioDeviceReadBps=<null>,blkioDeviceReadIOps=<null>,blkioDeviceWriteBps=<null>,blkioDeviceWriteIOps=<null>,memorySwappiness=<null>,capAdd=<null>,capDrop=<null>,containerIDFile=<null>,cpuPeriod=<null>,cpuShares=<null>,cpuQuota=<null>,cpusetCpus=<null>,cpusetMems=<null>,devices=<null>,diskQuota=<null>,dns=<null>,dnsSearch=<null>,extraHosts={},links=com.github.dockerjava.api.model.Links@a2d73fe,logConfig=<null>,lxcConf=<null>,memory=<null>,memorySwap=<null>,memoryReservation=<null>,kernelMemory=<null>,networkMode=<null>,oomKillDisable=<null>,autoRemove=<null>,oomScoreAdj=<null>,portBindings={},privileged=<null>,publishAllPorts=true,readonlyRootfs=<null>,restartPolicy=<null>,ulimits=<null>,volumesFrom={},pidMode=<null>,securityOpts=<null>,cgroupParent=<null>,volumeDriver=<null>,shmSize=<null>,pidsLimit=<null>,runtime=<null>,tmpFs=<null>],labels={org.testcontainers=true, org.testcontainers.sessionId=fa893716-df22-4f85-8c5b-d79d13cc729a},networkingConfig=<null>,ipv4Address=<null>,ipv6Address=<null>,aliases=<null>,authConfig=<null>,execution=com.github.dockerjava.core.exec.CreateContainerCmdExec@55cb042]
+22:05:13.272 [Test worker] INFO docker[postgres:9.6.12] - Starting container with ID: 40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac
+22:05:13.272 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac,com.github.dockerjava.core.exec.StartContainerCmdExec@5c0d851b
+22:05:14.456 [Test worker] INFO docker[postgres:9.6.12] - Container postgres:9.6.12 is starting: 40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac
+22:05:14.457 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@1945a88
+22:05:14.457 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac/json], queryParams={})
+22:05:14.475 [ducttape-0] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@f4fd2a3
+22:05:14.475 [ducttape-0] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac/json], queryParams={})
+22:05:14.488 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The files belonging to this database system will be owned by user "postgres".
+22:05:14.489 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: creating subdirectories ... ok
+22:05:14.489 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: fixing permissions on existing directory /var/lib/postgresql/data ... ok
+22:05:14.489 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:14.489 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: Data page checksums are disabled.
+22:05:14.489 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:14.489 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The default text search configuration will be set to "english".
+22:05:14.489 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The default database encoding has accordingly been set to "UTF8".
+22:05:14.489 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The database cluster will be initialized with locale "en_US.utf8".
+22:05:14.490 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:14.490 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: This user must also own the server process.
+22:05:14.504 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting default max_connections ... 100
+22:05:14.523 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting default shared_buffers ... 128MB
+22:05:14.523 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting dynamic shared memory implementation ... posix
+22:05:14.975 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: creating configuration files ... ok
+22:05:15.617 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: running bootstrap script ... ok
+22:05:16.143 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: performing post-bootstrap initialization ... ok
+22:05:16.501 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: syncing data to disk ... ok
+22:05:16.502 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:16.502 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:     pg_ctl -D /var/lib/postgresql/data -l logfile start
+22:05:16.502 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:16.502 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: --auth-local and --auth-host, the next time you run initdb.
+22:05:16.502 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: You can change this by editing pg_hba.conf or using the option -A, or
+22:05:16.502 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: WARNING: enabling "trust" authentication for local connections
+22:05:16.502 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: 
+22:05:16.502 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: Success. You can now start the database server using:
+22:05:16.502 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:16.548 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: waiting for server to start....LOG:  database system was shut down at 2019-11-09 20:05:16 UTC
+22:05:16.561 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  database system is ready to accept connections
+22:05:16.561 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  autovacuum launcher started
+22:05:16.561 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  MultiXact member wraparound protections are now enabled
+22:05:17.527 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:  done
+22:05:17.527 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: server started
+22:05:17.879 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:17.879 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+22:05:17.879 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:17.879 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:17.880 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: CREATE DATABASE
+22:05:17.890 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: waiting for server to shut down....LOG:  shutting down
+22:05:17.890 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  autovacuum launcher shutting down
+22:05:17.890 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  aborting any active transactions
+22:05:17.890 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  received fast shutdown request
+22:05:17.903 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  database system is shut down
+22:05:18.886 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: server stopped
+22:05:18.886 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:18.886 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: PostgreSQL init process complete; ready for start up.
+22:05:18.886 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:18.886 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:  done
+22:05:18.904 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  database system was shut down at 2019-11-09 20:05:17 UTC
+22:05:18.916 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  autovacuum launcher started
+22:05:18.916 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  database system is ready to accept connections
+22:05:18.917 [Test worker] INFO docker[postgres:9.6.12] - Container postgres:9.6.12 started
+Running CREATE TABLE foobar
+(
+    foo VARCHAR(255) NOT NULL,
+    bar VARCHAR(255) NOT NULL
+);
+22:05:18.969 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@5ba3203a
+22:05:18.970 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac/json], queryParams={})
+22:05:18.975 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac,<null>,com.github.dockerjava.core.exec.KillContainerCmdExec@2a0faab
+22:05:19.617 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@28d7b1bb
+22:05:19.617 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac/json], queryParams={})
+22:05:19.623 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 40bddb4b30cf29e0f94d5f188fb0bba582070a5cce7004311c3048803a180bac,true,true,com.github.dockerjava.core.exec.RemoveContainerCmdExec@575e04ef
+22:05:19.667 [Test worker] DEBUG org.testcontainers.utility.ResourceReaper - Removed container and associated volume(s): postgres:9.6.12
+22:05:19.669 [Test worker] DEBUG docker[postgres:9.6.12] - Starting container: postgres:9.6.12
+22:05:19.669 [Test worker] DEBUG docker[postgres:9.6.12] - Trying to start container: postgres:9.6.12
+22:05:19.669 [Test worker] DEBUG docker[postgres:9.6.12] - Trying to start container: postgres:9.6.12 (attempt 1/1)
+22:05:19.669 [Test worker] DEBUG docker[postgres:9.6.12] - Starting container: postgres:9.6.12
+22:05:19.669 [Test worker] INFO docker[postgres:9.6.12] - Creating container for image: postgres:9.6.12
+22:05:19.670 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Looking up auth config for image: postgres:9.6.12
+22:05:19.670 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - RegistryAuthLocator has configFile: /Users/olabodeadedoyin/.docker/config.json (exists) and commandPathPrefix: 
+22:05:19.670 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - registryName [index.docker.io] for dockerImageName [postgres:9.6.12]
+22:05:19.670 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Executing docker credential provider: docker-credential-osxkeychain to locate auth config for: index.docker.io
+22:05:19.670 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Executing [docker-credential-osxkeychain, get].
+22:05:19.673 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Started java.lang.UNIXProcess@4a52ef
+22:05:19.704 [WaitForProcess-java.lang.UNIXProcess@4a52ef] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.WaitForProcess - java.lang.UNIXProcess@4a52ef stopped with exit code 1
+22:05:19.705 [Test worker] INFO org.testcontainers.utility.RegistryAuthLocator - Credentials not found for host (index.docker.io) when using credential helper/store (docker-credential-osxkeychain)
+22:05:19.705 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - no matching Auth Configs - falling back to defaultAuthConfig [null]
+22:05:19.705 [Test worker] DEBUG org.testcontainers.dockerclient.auth.AuthDelegatingDockerClientConfig - Effective auth config [null]
+22:05:19.705 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: com.github.dockerjava.core.command.CreateContainerCmdImpl@761e3099[name=<null>,hostName=<null>,domainName=<null>,user=<null>,attachStdin=<null>,attachStdout=<null>,attachStderr=<null>,portSpecs=<null>,tty=<null>,stdinOpen=<null>,stdInOnce=<null>,env={POSTGRES_USER=migrant,POSTGRES_PASSWORD=migrant,POSTGRES_DB=migrant},cmd={postgres,-c,fsync=off},entrypoint=<null>,image=postgres:9.6.12,volumes=com.github.dockerjava.api.model.Volumes@739395e7,workingDir=<null>,macAddress=<null>,networkDisabled=<null>,exposedPorts=com.github.dockerjava.api.model.ExposedPorts@211c7c50,stopSignal=<null>,hostConfig=com.github.dockerjava.api.model.HostConfig@1fd95b86[binds=com.github.dockerjava.api.model.Binds@18443a1c,blkioWeight=<null>,blkioWeightDevice=<null>,blkioDeviceReadBps=<null>,blkioDeviceReadIOps=<null>,blkioDeviceWriteBps=<null>,blkioDeviceWriteIOps=<null>,memorySwappiness=<null>,capAdd=<null>,capDrop=<null>,containerIDFile=<null>,cpuPeriod=<null>,cpuShares=<null>,cpuQuota=<null>,cpusetCpus=<null>,cpusetMems=<null>,devices=<null>,diskQuota=<null>,dns=<null>,dnsSearch=<null>,extraHosts={},links=com.github.dockerjava.api.model.Links@7717a85e,logConfig=<null>,lxcConf=<null>,memory=<null>,memorySwap=<null>,memoryReservation=<null>,kernelMemory=<null>,networkMode=<null>,oomKillDisable=<null>,autoRemove=<null>,oomScoreAdj=<null>,portBindings={},privileged=<null>,publishAllPorts=true,readonlyRootfs=<null>,restartPolicy=<null>,ulimits=<null>,volumesFrom={},pidMode=<null>,securityOpts=<null>,cgroupParent=<null>,volumeDriver=<null>,shmSize=<null>,pidsLimit=<null>,runtime=<null>,tmpFs=<null>],labels={org.testcontainers=true, org.testcontainers.sessionId=fa893716-df22-4f85-8c5b-d79d13cc729a},networkingConfig=<null>,ipv4Address=<null>,ipv6Address=<null>,aliases=<null>,authConfig=<null>,execution=com.github.dockerjava.core.exec.CreateContainerCmdExec@607bcc48]
+22:05:19.817 [Test worker] INFO docker[postgres:9.6.12] - Starting container with ID: b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e
+22:05:19.818 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e,com.github.dockerjava.core.exec.StartContainerCmdExec@5d3ec405
+22:05:21.063 [Test worker] INFO docker[postgres:9.6.12] - Container postgres:9.6.12 is starting: b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e
+22:05:21.063 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@31b8d45c
+22:05:21.063 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e/json], queryParams={})
+22:05:21.070 [ducttape-0] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@3d53ddc5
+22:05:21.071 [ducttape-0] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e/json], queryParams={})
+22:05:21.091 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The files belonging to this database system will be owned by user "postgres".
+22:05:21.091 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: creating subdirectories ... ok
+22:05:21.091 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: fixing permissions on existing directory /var/lib/postgresql/data ... ok
+22:05:21.092 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:21.092 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: Data page checksums are disabled.
+22:05:21.092 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:21.092 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The default text search configuration will be set to "english".
+22:05:21.092 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The default database encoding has accordingly been set to "UTF8".
+22:05:21.092 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The database cluster will be initialized with locale "en_US.utf8".
+22:05:21.092 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:21.092 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: This user must also own the server process.
+22:05:21.106 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting default max_connections ... 100
+22:05:21.125 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting default shared_buffers ... 128MB
+22:05:21.125 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting dynamic shared memory implementation ... posix
+22:05:21.561 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: creating configuration files ... ok
+22:05:22.230 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: running bootstrap script ... ok
+22:05:22.694 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: performing post-bootstrap initialization ... ok
+22:05:22.987 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:22.987 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: --auth-local and --auth-host, the next time you run initdb.
+22:05:22.987 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: You can change this by editing pg_hba.conf or using the option -A, or
+22:05:22.987 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:22.987 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:     pg_ctl -D /var/lib/postgresql/data -l logfile start
+22:05:22.987 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:22.987 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: WARNING: enabling "trust" authentication for local connections
+22:05:22.987 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: 
+22:05:22.987 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: Success. You can now start the database server using:
+22:05:22.987 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: syncing data to disk ... ok
+22:05:23.031 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: waiting for server to start....LOG:  database system was shut down at 2019-11-09 20:05:22 UTC
+22:05:23.042 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  database system is ready to accept connections
+22:05:23.042 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  autovacuum launcher started
+22:05:23.042 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  MultiXact member wraparound protections are now enabled
+22:05:24.012 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: server started
+22:05:24.012 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:  done
+22:05:24.377 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: CREATE DATABASE
+22:05:24.387 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: .LOG:  autovacuum launcher shutting down
+22:05:24.387 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  aborting any active transactions
+22:05:24.388 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: waiting for server to shut down...LOG:  received fast shutdown request
+22:05:24.388 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:24.388 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+22:05:24.388 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:24.388 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:24.398 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  shutting down
+22:05:24.409 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  database system is shut down
+22:05:25.388 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: server stopped
+22:05:25.388 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:  done
+22:05:25.398 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:25.399 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: PostgreSQL init process complete; ready for start up.
+22:05:25.399 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:25.412 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  database system was shut down at 2019-11-09 20:05:24 UTC
+22:05:25.412 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  MultiXact member wraparound protections are now enabled
+22:05:25.422 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  database system is ready to accept connections
+22:05:25.423 [Test worker] INFO docker[postgres:9.6.12] - Container postgres:9.6.12 started
+Running CREATE TABLE foobar
+(
+    foo VARCHAR(255) NOT NULL,
+    bar VARCHAR(255) NOT NULL
+);
+22:05:25.462 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@5c991e60
+22:05:25.462 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e/json], queryParams={})
+22:05:25.471 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e,<null>,com.github.dockerjava.core.exec.KillContainerCmdExec@6624ec68
+22:05:26.066 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@71c34e74
+22:05:26.067 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e/json], queryParams={})
+22:05:26.072 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: b8041edcac15ce35b57938ef023c24e1ad9abd730eb989b05891151ea378821e,true,true,com.github.dockerjava.core.exec.RemoveContainerCmdExec@7317b4a8
+22:05:26.114 [Test worker] DEBUG org.testcontainers.utility.ResourceReaper - Removed container and associated volume(s): postgres:9.6.12
+22:05:26.116 [Test worker] DEBUG docker[postgres:9.6.12] - Starting container: postgres:9.6.12
+22:05:26.117 [Test worker] DEBUG docker[postgres:9.6.12] - Trying to start container: postgres:9.6.12
+22:05:26.117 [Test worker] DEBUG docker[postgres:9.6.12] - Trying to start container: postgres:9.6.12 (attempt 1/1)
+22:05:26.117 [Test worker] DEBUG docker[postgres:9.6.12] - Starting container: postgres:9.6.12
+22:05:26.117 [Test worker] INFO docker[postgres:9.6.12] - Creating container for image: postgres:9.6.12
+22:05:26.117 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Looking up auth config for image: postgres:9.6.12
+22:05:26.117 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - RegistryAuthLocator has configFile: /Users/olabodeadedoyin/.docker/config.json (exists) and commandPathPrefix: 
+22:05:26.117 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - registryName [index.docker.io] for dockerImageName [postgres:9.6.12]
+22:05:26.117 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - Executing docker credential provider: docker-credential-osxkeychain to locate auth config for: index.docker.io
+22:05:26.117 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Executing [docker-credential-osxkeychain, get].
+22:05:26.123 [Test worker] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.ProcessExecutor - Started java.lang.UNIXProcess@7d39efc5
+22:05:26.156 [WaitForProcess-java.lang.UNIXProcess@7d39efc5] DEBUG org.testcontainers.shaded.org.zeroturnaround.exec.WaitForProcess - java.lang.UNIXProcess@7d39efc5 stopped with exit code 1
+22:05:26.157 [Test worker] INFO org.testcontainers.utility.RegistryAuthLocator - Credentials not found for host (index.docker.io) when using credential helper/store (docker-credential-osxkeychain)
+22:05:26.157 [Test worker] DEBUG org.testcontainers.utility.RegistryAuthLocator - no matching Auth Configs - falling back to defaultAuthConfig [null]
+22:05:26.157 [Test worker] DEBUG org.testcontainers.dockerclient.auth.AuthDelegatingDockerClientConfig - Effective auth config [null]
+22:05:26.157 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: com.github.dockerjava.core.command.CreateContainerCmdImpl@478cde6c[name=<null>,hostName=<null>,domainName=<null>,user=<null>,attachStdin=<null>,attachStdout=<null>,attachStderr=<null>,portSpecs=<null>,tty=<null>,stdinOpen=<null>,stdInOnce=<null>,env={POSTGRES_USER=migrant,POSTGRES_PASSWORD=migrant,POSTGRES_DB=migrant},cmd={postgres,-c,fsync=off},entrypoint=<null>,image=postgres:9.6.12,volumes=com.github.dockerjava.api.model.Volumes@59a8cb4b,workingDir=<null>,macAddress=<null>,networkDisabled=<null>,exposedPorts=com.github.dockerjava.api.model.ExposedPorts@6bdd407c,stopSignal=<null>,hostConfig=com.github.dockerjava.api.model.HostConfig@2ee27d1b[binds=com.github.dockerjava.api.model.Binds@fbcb915,blkioWeight=<null>,blkioWeightDevice=<null>,blkioDeviceReadBps=<null>,blkioDeviceReadIOps=<null>,blkioDeviceWriteBps=<null>,blkioDeviceWriteIOps=<null>,memorySwappiness=<null>,capAdd=<null>,capDrop=<null>,containerIDFile=<null>,cpuPeriod=<null>,cpuShares=<null>,cpuQuota=<null>,cpusetCpus=<null>,cpusetMems=<null>,devices=<null>,diskQuota=<null>,dns=<null>,dnsSearch=<null>,extraHosts={},links=com.github.dockerjava.api.model.Links@1051d93a,logConfig=<null>,lxcConf=<null>,memory=<null>,memorySwap=<null>,memoryReservation=<null>,kernelMemory=<null>,networkMode=<null>,oomKillDisable=<null>,autoRemove=<null>,oomScoreAdj=<null>,portBindings={},privileged=<null>,publishAllPorts=true,readonlyRootfs=<null>,restartPolicy=<null>,ulimits=<null>,volumesFrom={},pidMode=<null>,securityOpts=<null>,cgroupParent=<null>,volumeDriver=<null>,shmSize=<null>,pidsLimit=<null>,runtime=<null>,tmpFs=<null>],labels={org.testcontainers=true, org.testcontainers.sessionId=fa893716-df22-4f85-8c5b-d79d13cc729a},networkingConfig=<null>,ipv4Address=<null>,ipv6Address=<null>,aliases=<null>,authConfig=<null>,execution=com.github.dockerjava.core.exec.CreateContainerCmdExec@2c391873]
+22:05:26.256 [Test worker] INFO docker[postgres:9.6.12] - Starting container with ID: 4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729
+22:05:26.257 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729,com.github.dockerjava.core.exec.StartContainerCmdExec@6e904187
+22:05:27.385 [Test worker] INFO docker[postgres:9.6.12] - Container postgres:9.6.12 is starting: 4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729
+22:05:27.386 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@4186c902
+22:05:27.386 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729/json], queryParams={})
+22:05:27.393 [ducttape-0] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@623b8e5c
+22:05:27.394 [ducttape-0] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729/json], queryParams={})
+22:05:27.408 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The files belonging to this database system will be owned by user "postgres".
+22:05:27.419 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: creating subdirectories ... ok
+22:05:27.419 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: fixing permissions on existing directory /var/lib/postgresql/data ... ok
+22:05:27.420 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:27.420 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: Data page checksums are disabled.
+22:05:27.420 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:27.420 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The default text search configuration will be set to "english".
+22:05:27.420 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The default database encoding has accordingly been set to "UTF8".
+22:05:27.420 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: The database cluster will be initialized with locale "en_US.utf8".
+22:05:27.420 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:27.420 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: This user must also own the server process.
+22:05:27.433 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting default max_connections ... 100
+22:05:27.443 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting default shared_buffers ... 128MB
+22:05:27.444 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: selecting dynamic shared memory implementation ... posix
+22:05:27.853 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: creating configuration files ... ok
+22:05:28.446 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: running bootstrap script ... ok
+22:05:28.865 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: performing post-bootstrap initialization ... ok
+22:05:29.191 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: 
+22:05:29.191 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: --auth-local and --auth-host, the next time you run initdb.
+22:05:29.192 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:29.192 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:     pg_ctl -D /var/lib/postgresql/data -l logfile start
+22:05:29.192 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: You can change this by editing pg_hba.conf or using the option -A, or
+22:05:29.192 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:29.192 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: Success. You can now start the database server using:
+22:05:29.192 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: WARNING: enabling "trust" authentication for local connections
+22:05:29.192 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:29.192 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: syncing data to disk ... ok
+22:05:29.237 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: waiting for server to start....LOG:  database system was shut down at 2019-11-09 20:05:28 UTC
+22:05:29.247 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  autovacuum launcher started
+22:05:29.247 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  database system is ready to accept connections
+22:05:29.247 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  MultiXact member wraparound protections are now enabled
+22:05:30.218 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:  done
+22:05:30.218 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: server started
+22:05:30.572 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:30.572 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:30.572 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: CREATE DATABASE
+22:05:30.584 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: .LOG:  shutting down
+22:05:30.585 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  autovacuum launcher shutting down
+22:05:30.585 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  aborting any active transactions
+22:05:30.585 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: waiting for server to shut down...LOG:  received fast shutdown request
+22:05:30.585 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:30.585 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+22:05:30.596 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: LOG:  database system is shut down
+22:05:31.582 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT:  done
+22:05:31.583 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: server stopped
+22:05:31.593 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:31.593 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: PostgreSQL init process complete; ready for start up.
+22:05:31.593 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDOUT: 
+22:05:31.604 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  database system was shut down at 2019-11-09 20:05:30 UTC
+22:05:31.619 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  autovacuum launcher started
+22:05:31.619 [Test worker] DEBUG org.testcontainers.containers.output.WaitingConsumer - STDERR: LOG:  database system is ready to accept connections
+22:05:31.619 [Test worker] INFO docker[postgres:9.6.12] - Container postgres:9.6.12 started
+22:05:31.655 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@6190b397
+22:05:31.655 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729/json], queryParams={})
+22:05:31.659 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729,<null>,com.github.dockerjava.core.exec.KillContainerCmdExec@44f2c1b2
+22:05:32.332 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729,false,com.github.dockerjava.core.exec.InspectContainerCmdExec@5262a159
+22:05:32.332 [Test worker] DEBUG com.github.dockerjava.core.exec.InspectContainerCmdExec - GET: OkHttpWebTarget(okHttpClient=org.testcontainers.shaded.okhttp3.OkHttpClient@e5d05ce, baseUrl=http://docker.socket/, path=[/containers/4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729/json], queryParams={})
+22:05:32.336 [Test worker] DEBUG com.github.dockerjava.core.command.AbstrDockerCmd - Cmd: 4871bd8902c17cc34fc4768f9201205569a283068a7db50b4353a75611f50729,true,true,com.github.dockerjava.core.exec.RemoveContainerCmdExec@374850fe
+22:05:32.379 [Test worker] DEBUG org.testcontainers.utility.ResourceReaper - Removed container and associated volume(s): postgres:9.6.12
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

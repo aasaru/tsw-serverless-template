@@ -1,0 +1,49 @@
+service: change-authentication
+
+plugins:
+  - serverless-stage-manager
+
+provider:
+  name: aws
+  runtime: java8
+  region: eu-west-1
+  timeout: 10
+  stage: ${opt:stage,'staging'}
+  vpc:
+    securityGroupIds:
+      - sg-078b2e7c
+    subnetIds:
+      - subnet-95035df2
+      - subnet-890424c0
+      - subnet-0457cc5f
+
+  environment:
+    DB_HOST: ${self:custom.dbHost.${self:provider.stage}}
+    DB_USER: ${self:custom.dbUser.${self:provider.stage}}
+    DB_PASSWORD: ${self:custom.dbPassword.${self:provider.stage}}
+    DB_DATABASE: ${self:custom.dbDatabase.${self:provider.stage}}
+    DB_PORT: ${self:custom.dbPort.${self:provider.stage}}
+
+package:
+  artifact: build/libs/serverless-app-all.jar
+
+custom:
+  stages:
+    - staging
+    - prod
+  dbHost:
+    staging: auth.cluster-cnqasrsgtev6.eu-west-1.rds.amazonaws.com
+    prod: auth.cluster-cnqasrsgtev6.eu-west-1.rds.amazonaws.com
+  dbUser:
+    staging: change_auth
+    prod: change_auth
+  dbPassword:
+    staging: ${ssm:/change-auth/staging/db-password~true} #get from ssm (secure)
+    prod: ${ssm:/change-auth/prod/db-password~true} #get from ssm (secure)
+  dbDatabase:
+    staging: auth
+    prod: auth
+  dbPort:
+    staging: '5432'
+    prod: '5432'
+

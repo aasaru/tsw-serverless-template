@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.getchange.UserRepositorySpec" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-11-10T23:36:18" hostname="Olabodes-MacBook-Pro-2.local" time="0.029">
+  <properties/>
+  <testcase name="can create user()" classname="com.getchange.UserRepositorySpec" time="0.014"/>
+  <testcase name="can get user()" classname="com.getchange.UserRepositorySpec" time="0.004"/>
+  <system-out><![CDATA[/Users/olabodeadedoyin/IdeaProjects/serverless-tsw-template/serverless-app/build/resources/main/migrationscripts
+01:36:18.421 [Test worker] INFO com.getchange.migrant.MigrationScriptsScanner - Found file 3_create_orders_table.sql
+01:36:18.428 [Test worker] INFO com.getchange.migrant.MigrationScriptsScanner - Found file 1_create_update_trigger.sql
+01:36:18.429 [Test worker] INFO com.getchange.migrant.MigrationScriptsScanner - Found file 2_create_users_table.sql
+Running CREATE OR REPLACE FUNCTION trigger_set_updated_time()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_time = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+Running CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL
+);
+
+CREATE TRIGGER set_updated_time
+    BEFORE UPDATE ON users
+    FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_updated_time();
+Running CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users (id),
+    amount NUMERIC NOT NULL,
+    from_Currency VARCHAR(3) NOT NULL,
+    to_Currency VARCHAR(3) NOT NULL,
+    order_type VARCHAR(50) NOT NULL,
+    created_time TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TRIGGER set_updated_time
+    BEFORE UPDATE ON orders
+    FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_updated_time();
+/Users/olabodeadedoyin/IdeaProjects/serverless-tsw-template/serverless-app/build/resources/main/migrationscripts
+01:36:18.523 [Test worker] INFO com.getchange.migrant.MigrationScriptsScanner - Found file 3_create_orders_table.sql
+01:36:18.523 [Test worker] INFO com.getchange.migrant.MigrationScriptsScanner - Found file 1_create_update_trigger.sql
+01:36:18.523 [Test worker] INFO com.getchange.migrant.MigrationScriptsScanner - Found file 2_create_users_table.sql
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

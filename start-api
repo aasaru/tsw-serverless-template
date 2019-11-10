@@ -1,0 +1,10 @@
+./gradlew build :serverless-app:shadowJar
+cd serverless-app
+rm -f serverless.yml
+rm -f template.yml
+cat local-deploy.yml <(echo) functions.yml > serverless.yml
+./generate-sam-template
+docker-compose up -d
+sam local invoke ChangeAuthenticationDevMigrate <<< "{}"
+sam local start-api
+cd ../

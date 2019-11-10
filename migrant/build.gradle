@@ -1,0 +1,41 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+group 'com.getchange'
+version '1.0.2'
+
+def  globalConf = rootProject.ext
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    Map<String, String> dependencies = globalConf.commonDependencies
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testImplementation(
+            dependencies.assertj,
+            dependencies.junitJupiter
+    )
+    testImplementation(dependencies.junitJupiter)
+    testCompile dependencies.mockito
+    testCompile dependencies.testContainersJupiter
+    testCompile dependencies.testContainersPostgres
+    compile dependencies.postgresDriver
+    compile dependencies.kotlinReflect
+    compile dependencies.slf4j
+    compile dependencies.logbackClassic
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+test {
+    useJUnitPlatform()
+}

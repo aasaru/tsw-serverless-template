@@ -1,0 +1,11 @@
+{
+  "name": "my-hello",
+  "version": "1.0.0",
+  "devDependencies": {
+    "request": "^2.88.0",
+    "serverless-localstack": "^0.4.19",
+    "serverless-offline": "^5.10.1",
+    "serverless-sam": "^0.2.0",
+    "serverless-stage-manager": "^1.0.5"
+  }
+}

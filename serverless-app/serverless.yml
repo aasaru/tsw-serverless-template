@@ -1,0 +1,31 @@
+service: change-authentication
+
+plugins:
+  - serverless-sam
+
+provider:
+  name: aws
+  runtime: java8
+  timeout: 10
+  stage: dev
+
+  environment:
+    DB_HOST: host.docker.internal
+    DB_USER: changeauthentication
+    DB_PASSWORD: changeauthentication
+    DB_DATABASE: changeauthentication
+    DB_PORT: 5435
+
+package:
+  artifact: build/libs/serverless-app-all.jar
+functions:
+  migrate:
+    handler: com.getchange.tsw.MigrationHandler
+    timeout: 300
+  hello:
+    handler: com.getchange.tsw.HelloHandler
+    timeout: 300
+    events:
+      - http:
+          path: hello
+          method: get

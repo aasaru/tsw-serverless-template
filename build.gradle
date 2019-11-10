@@ -1,0 +1,58 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jlleitschuh.gradle:ktlint-gradle:8.2.0"
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
+    id "org.jlleitschuh.gradle.ktlint" version "8.2.0"
+}
+
+apply from: 'gradle/dependencies.gradle'
+
+group 'com.getchange'
+version '1.0'
+
+repositories {
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    mavenCentral()
+    jcenter()
+}
+
+allprojects {}
+
+subprojects {
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
+    sourceSets {
+        main {
+            resources.srcDirs = ["src/main/resources"]
+        }
+        test {
+            resources.srcDirs = ["src/test/resources"]
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    compile project (':order-engine')
+    compile project (':migrant')
+    compile project (':serverless-app')
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}

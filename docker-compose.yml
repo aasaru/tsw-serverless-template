@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  database:
+    image: postgres:10.3-alpine
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_USER=changeauthentication
+      - POSTGRES_PASSWORD=changeauthentication
+      - POSTGRES_DB=changeauthentication

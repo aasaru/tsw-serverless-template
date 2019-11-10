@@ -1,0 +1,2 @@
+rootProject.name = 'serverless-tsw-template'
+include 'order-engine', 'migrant', 'serverless-app'
