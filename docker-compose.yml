@@ -6,6 +6,6 @@ services:
     ports:
       - "5435:5432"
     environment:
-      - POSTGRES_USER=changeauthentication
-      - POSTGRES_PASSWORD=changeauthentication
-      - POSTGRES_DB=changeauthentication
+      - POSTGRES_USER=tswdatabase
+      - POSTGRES_PASSWORD=tswdatabase
+      - POSTGRES_DB=tswdatabase

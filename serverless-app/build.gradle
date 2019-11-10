@@ -52,16 +52,20 @@ task deploy(type: Exec, dependsOn: 'shadowJar') {
   commandLine 'serverless', 'deploy'
 }
 
-//task copyMigrations {
-//  mkdir('src/main/resources/migrationscripts')
-//  copy {
-//    from 'migrationscripts/'
-//    into 'src/main/resources/migrationscripts'
-//  }
-//}
-//
-//
-//shadowJar.dependsOn copyMigrations
+task copyMigrations {
+  mkdir('src/test/resources/migrationscripts')
+  copy {
+    from 'src/main/resources/migrationscripts'
+    into 'src/test/resources/migrationscripts'
+  }
+}
+
+task cleanUpAfterBuild {
+  delete 'src/test/resources/migrationscripts'
+}
+
+test.dependsOn copyMigrations
+test.finalizedBy cleanUpAfterBuild
 
 test {
   useJUnitPlatform()

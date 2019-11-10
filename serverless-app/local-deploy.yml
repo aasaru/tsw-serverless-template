@@ -11,9 +11,9 @@ provider:
 
   environment:
     DB_HOST: host.docker.internal
-    DB_USER: changeauthentication
-    DB_PASSWORD: changeauthentication
-    DB_DATABASE: changeauthentication
+    DB_USER: tswdatabase
+    DB_PASSWORD: tswdatabase
+    DB_DATABASE: tswdatabase
     DB_PORT: 5435
 
 package:

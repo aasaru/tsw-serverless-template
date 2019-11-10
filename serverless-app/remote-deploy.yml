@@ -1,4 +1,4 @@
-service: change-authentication
+service: tsw
 
 plugins:
   - serverless-stage-manager
@@ -32,18 +32,17 @@ custom:
     - staging
     - prod
   dbHost:
-    staging: auth.cluster-cnqasrsgtev6.eu-west-1.rds.amazonaws.com
-    prod: auth.cluster-cnqasrsgtev6.eu-west-1.rds.amazonaws.com
+    staging: tswdatabase2.cluster-cnqasrsgtev6.eu-west-1.rds.amazonaws.com
+    prod: tswdatabase2.cluster-cnqasrsgtev6.eu-west-1.rds.amazonaws.com
   dbUser:
-    staging: change_auth
-    prod: change_auth
+    staging: tswdatabase
+    prod: tswdatabase
   dbPassword:
-    staging: ${ssm:/change-auth/staging/db-password~true} #get from ssm (secure)
-    prod: ${ssm:/change-auth/prod/db-password~true} #get from ssm (secure)
+    staging: ${ssm:/tswdatabase/password~true} #get from ssm (secure)
+    prod: null
   dbDatabase:
-    staging: auth
-    prod: auth
+    staging: tswdatabase
+    prod: tswdatabase
   dbPort:
     staging: '5432'
     prod: '5432'
-

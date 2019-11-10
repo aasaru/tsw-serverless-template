@@ -4,17 +4,15 @@ import java.math.BigDecimal
 import java.util.Date
 
 class OrderService(
-    private val orderRepository: OrderRepository,
-    private val userRepository: UserRepository
+    private val orderRepository: OrderRepository
 ) {
     fun createBuyOrder(
         userId: Long,
         amount: Double,
         currency: Currency
     ) {
-        val user = userRepository.getUserById(userId)
-        val order = Order(
-            user = user,
+        val order = OrderEntity(
+            userId = userId,
             createdTime = Date(),
             amount = BigDecimal.valueOf(amount),
             fromCurrency = currency,
@@ -30,9 +28,8 @@ class OrderService(
         amount: Double,
         currency: Currency
     ) {
-        val user = userRepository.getUserById(userId)
-        val order = Order(
-            user = user,
+        val order = OrderEntity(
+            userId = userId,
             createdTime = Date(),
             amount = BigDecimal.valueOf(amount),
             fromCurrency = currency,
@@ -49,9 +46,8 @@ class OrderService(
         fromCurrency: Currency,
         toCurrency: Currency
     ) {
-        val user = userRepository.getUserById(userId)
-        val order = Order(
-            user = user,
+        val order = OrderEntity(
+            userId = userId,
             createdTime = Date(),
             amount = BigDecimal.valueOf(amount),
             fromCurrency = fromCurrency,
@@ -60,5 +56,9 @@ class OrderService(
         )
 
         orderRepository.createorder(order)
+    }
+
+    fun listOrdersForUser(userId: Long): List<OrderEntity> {
+        return orderRepository.getOrdersForUser(userId)
     }
 }

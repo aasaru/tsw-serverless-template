@@ -3,9 +3,9 @@ package com.getchange.orderengine
 import java.math.BigDecimal
 import java.util.Date
 
-data class Order(
+data class OrderEntity(
     val id: Long? = null,
-    val user: User,
+    val userId: Long,
     val amount: BigDecimal,
     val fromCurrency: Currency,
     val toCurrency: Currency,

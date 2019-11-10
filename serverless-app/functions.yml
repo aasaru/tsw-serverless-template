@@ -1,11 +1,48 @@
 functions:
   migrate:
-    handler: com.getchange.tsw.MigrationHandler
+    handler: com.getchange.tsw.platform.aws.MigrationHandler
     timeout: 300
-  hello:
-    handler: com.getchange.tsw.HelloHandler
-    timeout: 300
+  create-user:
+    handler: com.getchange.tsw.platform.aws.CreateUserHandler
     events:
       - http:
-          path: hello
+          path: users
+          method: post
+  get-user:
+    handler: com.getchange.tsw.platform.aws.GetUserHandler
+    events:
+      - http:
+          path: users/{id}
           method: get
+          request:
+            parameters:
+              paths:
+                id: true
+  create-buy-order:
+    handler: com.getchange.tsw.platform.aws.CreateBuyOrderHandler
+    events:
+      - http:
+          path: orders/buy
+          method: post
+  create-sell-order:
+    handler: com.getchange.tsw.platform.aws.CreateSellOrderHandler
+    events:
+      - http:
+          path: orders/sell
+          method: post
+  create-convert-order:
+    handler: com.getchange.tsw.platform.aws.CreateConvertOrderHandler
+    events:
+      - http:
+          path: orders/convert
+          method: post
+  get-user-orders:
+    handler: com.getchange.tsw.platform.aws.GetUserOrdersHandler
+    events:
+      - http:
+          path: orders/user/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true

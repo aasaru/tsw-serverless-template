@@ -1,6 +1,6 @@
 package com.getchange.orderengine
 
 interface OrderRepository {
-    fun createorder(order: Order)
-    fun getOrderForUser(userId: Long)
+    fun createorder(order: OrderEntity)
+    fun getOrdersForUser(userId: Long): List<OrderEntity>
 }
