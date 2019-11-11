@@ -32,13 +32,13 @@ custom:
     - staging
     - prod
   dbHost:
-    staging: tswdatabase2.cluster-cnqasrsgtev6.eu-west-1.rds.amazonaws.com
-    prod: tswdatabase2.cluster-cnqasrsgtev6.eu-west-1.rds.amazonaws.com
+    staging: <change>
+    prod: <change>
   dbUser:
     staging: tswdatabase
     prod: tswdatabase
   dbPassword:
-    staging: ${ssm:/tswdatabase/password~true} #get from ssm (secure)
+    staging: <change> #${ssm:/<change>/<change>~true}
     prod: null
   dbDatabase:
     staging: tswdatabase
