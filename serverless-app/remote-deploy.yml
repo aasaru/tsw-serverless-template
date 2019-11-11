@@ -11,11 +11,11 @@ provider:
   stage: ${opt:stage,'staging'}
   vpc:
     securityGroupIds:
-      - sg-078b2e7c
+      - <change>
     subnetIds:
-      - subnet-95035df2
-      - subnet-890424c0
-      - subnet-0457cc5f
+      - <change>
+      - <change>
+      - <change>
 
   environment:
     DB_HOST: ${self:custom.dbHost.${self:provider.stage}}
