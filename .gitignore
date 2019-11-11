@@ -21,3 +21,15 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+.idea
+serverless-app/node_modules
+serverless-app/.serverless
+serverless-app/.gradle
+serverless-app/build
+serverless-app/out
+migrant/.gradle
+migrant/build
+migrant/out
+order-engine/build
+order-engine/out
