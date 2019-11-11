@@ -24,7 +24,6 @@ hs_err_pid*
 
 .idea
 serverless-app/node_modules
-serverless-app/.serverless
 serverless-app/.gradle
 serverless-app/build
 serverless-app/out
